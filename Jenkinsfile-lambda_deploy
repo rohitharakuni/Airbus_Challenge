@@ -1,0 +1,33 @@
+pipeline {
+    agent {
+        label 'lambda-executor'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/<your-repo>/<your-code>.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    def function_name = 'lambda-ec2-list'
+                    def handler_name = 'lambda_handler'
+                    def role_name = 'lambda_execution_role'
+                    def s3_bucket_name = 'lambda-deployment-bucket'
+                    def s3_object_name = "${function_name}.zip"
+
+                    sh "zip -r ${s3_object_name} *"
+                    sh "aws s3 cp ${s3_object_name} s3://${s3_bucket_name}/${s3_object_name}"
+
+                    sh "aws lambda create-function --function-name ${function_name} --runtime python3.8 --role arn:aws:iam::<YOUR-ACCOUNT-ID>:role/${role_name} --handler ${handler_name} --timeout 300 --memory-size 256 --code S3Bucket=${s3_bucket_name},S3Key=${s3_object_name}"
+                }
+            }
+        }
+    }
+}
