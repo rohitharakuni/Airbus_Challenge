@@ -1,8 +1,8 @@
 ********************  Welcome to Airbus_Challenge  ************************
 
-1.Deploying an EC2 Machine using TF:
+1.Deploying an EC2 Machine using TF: "file name" -> "launch_ec2.tf"
 
-A. Terraform AWS EC2 Instance
+A. Terraform AWS EC2 Instance. 
 
 Prerequisites:
 
@@ -32,7 +32,7 @@ Note:>
 
 2.Be mindful that creating EC2 instances can incur charges on your AWS account, so be sure to delete the instances when you are done using them.
 
-B. Write a python program to list the all EC2 instance per region:
+B. Write a python program to list the all EC2 instance per region: "file name" -> "list_all_instances_from_all_regions.py"
 
 This script is used to retrieve a list of all available AWS regions and instances in those regions. It utilizes the boto3 library to interact with the AWS EC2 service.
 
@@ -74,7 +74,7 @@ Note:
 
 4.This script can only be used to get the information of running instances and their id and state, it doesn't have any functionality of creating or terminating instances.
 
-C. Test this code using pytest:
+C. Test this code using pytest: "file name" -> "test_lambda.py"
 
 This code is a Python script that uses the 'boto3' library to interact with the AWS EC2 service and 'pytest' library for testing.
 
@@ -115,7 +115,7 @@ It is recommended to test the script in a test environment before running it in 
 
 Here is a Jenkinsfile that can be used to deploy the code to AWS Lambda using Jenkins,
 
-Please find above for the jenkinsfile
+Please find above for the Jenkinsfile
 
 -> This Jenkinsfile defines a pipeline with three stages:
 
@@ -133,7 +133,7 @@ You will also need to configure AWS credentials in Jenkins.
 It is recommended to test this pipeline in a test environment before running it in production.
 Please also make sure that the 'lambda_execution_role' and 'lambda_deployment_bucket' exists and the role should have enough permissions to create and access lambda and s3.
 
-Deployment of EC2 instance listing to AWS Lambda using Jenkins:-
+Deployment of EC2 instance listing to AWS Lambda using Jenkins:- "file name" -> "Jenkinsfile-lambda_deploy"
 
 This Jenkinsfile is used to deploy a Python script that lists all available AWS regions and instances in those regions to AWS Lambda using Jenkins.
 
